@@ -18,8 +18,8 @@
     "test:unit": "vue-cli-service test:unit",
     "test:unit:watch": "vue-cli-service test:unit --watch",
     "ui": "vue ui",
-    "delete-docs-report": "rm ./docs/report.html",
-    "delete-dist-report": "rm ./dist/report.html",
+    "delete-docs-report": "echo 1",
+    "delete-dist-report": "echo 1",
     "delete:reports": "npm run delete-docs-report && npm run delete-dist-report"
   },
   "peerDependencies": {
