@@ -2,7 +2,7 @@
   <div
     ref="time-picker"
     :class="{'inline': inline, 'is-dark': dark, 'with-border': !onlyTime }"
-    :style="[{height: `${height}px`}]"
+    :style="[{height: `${height}px`, 'max-height': `${height}px`}]"
     class="time-picker flex flex-fixed flex-1"
   >
     <div
