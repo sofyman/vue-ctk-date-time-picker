@@ -284,6 +284,8 @@
         return Math.round(scrollTop / itemHeight)
       },
       onScrollHours: debounce(function (scroll) {
+        return;
+        if (!this.visible) return;
         const value = this.getValue(scroll)
         const hour = this.isTwelveFormat
           ? this.apm.toLowerCase() === 'am'
@@ -295,6 +297,8 @@
         this.emitValue()
       }, 100),
       onScrollMinutes: debounce(function (scroll) {
+        return;
+        if (!this.visible) return;
         const value = this.getValue(scroll)
         const minute = value * this.minuteInterval
         if (this.isMinutesDisabled(minute)) return
@@ -302,6 +306,8 @@
         this.emitValue()
       }, 100),
       onScrollApms: debounce(function (scroll) {
+        return;
+        if (!this.visible) return;
         const value = this.getValue(scroll)
         if (this.apms && this.apms[value] && this.apm !== this.apms[value].value) {
           const newHour = this.apm === 'pm' || this.apm === 'PM' ? this.hour - 12 : this.hour + 12
@@ -362,23 +368,25 @@
         const containers = ['hours', 'minutes']
         if (this.apms) containers.push('apms')
         setTimeout(() => {
-          containers.forEach((container) => {
-            const elem = this.$refs[container][0]
-            elem.scrollTop = 0
-            const selected = elem.querySelector(`.time-picker-column-item.active`)
-            if (selected) {
-              const boundsSelected = selected.getBoundingClientRect()
-              const boundsElem = elem.getBoundingClientRect()
-              const timePickerHeight = this.$refs['time-picker'].clientHeight
-              if (boundsSelected && boundsElem) {
-                elem.scrollTop = (28 / 2) + boundsSelected.top - boundsElem.top - timePickerHeight / 2
+          setTimeout(() => {
+            containers.forEach((container) => {
+              const elem = this.$refs[container][0]
+              elem.scrollTop = 0
+              const selected = elem.querySelector(`.time-picker-column-item.active`)
+              if (selected) {
+                const boundsSelected = selected.getBoundingClientRect()
+                const boundsElem = elem.getBoundingClientRect()
+                const timePickerHeight = this.$refs['time-picker'].clientHeight
+                if (boundsSelected && boundsElem) {
+                  elem.scrollTop = (28 / 2) + boundsSelected.top - boundsElem.top - timePickerHeight / 2
+                }
               }
-            }
-            setTimeout(() => {
-              this.noScrollEvent = false
-            }, 500)
-          })
-        }, 0)
+              setTimeout(() => {
+                this.noScrollEvent = false
+              }, 500)
+            })
+          }, 10)
+        }, 10)
       },
       getAvailableHour () {
         const availableHours = this.hours.find((element) => {
@@ -438,8 +446,8 @@
       right: 0;
       box-sizing: border-box;
       text-align: left;
-      border-top: 1px solid #CCC;
-      border-bottom: 1px solid #CCC;
+      /*border-top: 1px solid #CCC;*/
+      /*border-bottom: 1px solid #CCC;*/
     }
     &-column {
       position: relative;

@@ -263,6 +263,7 @@
         const target = this.$slots.default[0].elm
         if (target) {
           target.addEventListener('click', () => {
+            if (!this.hasPickerOpen) target.blur()
             this.toggleDatePicker()
           })
         } else {
@@ -312,8 +313,8 @@
       toggleDatePicker (val) {
         if (this.disabled) return
         const isOpen = (val === false || val === true) ? val : !this.pickerOpen
-        this.setBodyOverflow(isOpen)
         this.pickerOpen = isOpen
+        this.setBodyOverflow(isOpen)
         this.$emit(isOpen ? 'is-shown' : 'is-hidden')
         if (this.pickerOpen && !this.position) {
           this.pickerPosition = this.getPosition()
