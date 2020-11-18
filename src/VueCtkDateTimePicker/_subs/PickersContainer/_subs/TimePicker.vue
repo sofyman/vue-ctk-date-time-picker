@@ -194,7 +194,7 @@
             .map((_, i) => i)
             .filter(h => h >= minEnabledHour && h <= maxEnabledHour)
 
-          if (!enabledHours.includes(this.hour)) {
+          if (this.hour !== null && !enabledHours.includes(this.hour)) {
             this.hour = enabledHours[0] // eslint-disable-line
             this.emitValue()
           }
@@ -240,7 +240,7 @@
             .map((_, i) => i)
             .filter(m => m >= minEnabledMinute && m <= maxEnabledMinute)
 
-          if (!enabledMinutes.includes(this.minute)) {
+          if (this.minute !== null && !enabledMinutes.includes(this.minute)) {
             this.minute = enabledMinutes[0] // eslint-disable-line
             this.emitValue()
           }
